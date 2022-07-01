@@ -1,0 +1,5 @@
+Set environmental variables
+
+MYSQL_PASSWORD
+ACCESS_TOKEN_SECRET
+REFRESH_TOKEN_SECRET
