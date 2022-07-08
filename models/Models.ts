@@ -49,7 +49,7 @@ class Post extends Model{
 
 async function run(){
     // await Post.query().insert({postText: "why", author: 1})
-    const posts = await Post.query();
+    // const posts = await Post.query();
     // console.log(posts)
     const post = await Post.query().where("postText", "why");
     const user = await Post.relatedQuery("postAuthor").for(post);

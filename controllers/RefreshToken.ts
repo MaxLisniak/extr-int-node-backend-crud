@@ -11,7 +11,7 @@ module.exports.handleRefreshToken =  async (req, res) => {
     if (!cookies?.refreshToken) { 
         logger.error("A token cannot be refreshed as no refresh token provided")
         return res.sendStatus(401);
-    };
+    }
     const refreshToken = cookies.refreshToken;
 
     // find user by refresh token
@@ -20,7 +20,7 @@ module.exports.handleRefreshToken =  async (req, res) => {
     if (foundUser.length === 0) {
         logger.error("A token cannot be refreshed, as the user hasn't been validly authenticated")
         return res.sendStatus(403);
-    }; //Forbidden 
+    } //Forbidden 
     foundUser = foundUser[0];
     // evaluate jwt 
     jwt.verify(
@@ -30,7 +30,7 @@ module.exports.handleRefreshToken =  async (req, res) => {
             if (err || foundUser.username !== decoded.username) {
                 logger.error("An error occured while verifying the privided refresh token")
                 return res.sendStatus(403)
-            };
+            }
             // new access token
             const accessToken = jwt.sign(
                 { userId: decoded.userId, username: decoded.username }, 
@@ -42,3 +42,4 @@ module.exports.handleRefreshToken =  async (req, res) => {
         }
     );
 }
+export {}

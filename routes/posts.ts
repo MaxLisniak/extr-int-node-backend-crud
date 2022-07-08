@@ -1,6 +1,6 @@
-var express = require('express');
+const express = require('express');
 const { getPosts, createPost, updatePost, deletePost } = require('../controllers/Posts');
-var router = express.Router();
+const router = express.Router();
 
 // get the posts 
 router.get(
@@ -27,3 +27,4 @@ router.delete(
 );
 
 module.exports = router;
+export {}

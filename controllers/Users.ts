@@ -20,7 +20,7 @@ exports.signup = [
     body("confPassword")
     .exists().notEmpty().withMessage("Password confirmation must be provided"),
 
-    async(req, res, next) => {
+    async(req, res) => {
 
         logger.info("Trying to sign up a new user")
         // perform validation
@@ -34,7 +34,7 @@ exports.signup = [
             if(password !== confPassword) {
                 logger.error("An error occured while trying to sign up: Password and Password confirmation do not match");
                 return res.status(400).json({errors: [{ msg: "Password and Password confirmation do not match" }]})
-            };
+            }
             // hash password
             const salt = await bcrypt.genSalt();
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -71,7 +71,7 @@ exports.signin = [
     body("password")
     .exists().notEmpty().withMessage("Password must be provided"),
 
-    async (req, res, next) => {
+    async (req, res) => {
         // perform validation
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -94,7 +94,7 @@ exports.signin = [
             if(!match) {
                 logger.error("An error occured while trying to sign in: Wrong password is provided")
                 return res.status(400).json({errors: [{ msg: "Wrong Password" }]})
-            };
+            }
             
             const userId = user[0].id;
             const username = user[0].username;
@@ -133,7 +133,7 @@ exports.signout = async(req, res) => {
     if(!refreshToken) {
         logger.error("An error occured while trying to sign out: No refresh token is provided")
         return res.sendStatus(204)
-    };
+    }
 
     // query a user by refresh token and check if it exists
     const user = await database("users")
@@ -142,7 +142,7 @@ exports.signout = async(req, res) => {
     if(!user[0]) {
         logger.error("An error occured while trying to sign out: User with provided refresh token is not signed in")
         return res.sendStatus(204)
-    };
+    }
 
     // remove the refresh token from the user in database
     await database("users")
@@ -154,3 +154,4 @@ exports.signout = async(req, res) => {
     logger.info(`User with the username ${user[0].username} is signed out`)
     return res.redirect("/");
 }
+export {}

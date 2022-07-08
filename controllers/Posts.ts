@@ -6,7 +6,7 @@ const logger = require("../logger.js");
 // queries and returns all posts
 const getPosts = [
 
-    async (req, res, next) => 
+    async (req, res) => 
     {
         try {
             // query all posts and join with users table
@@ -32,7 +32,7 @@ const createPost = [
     .exists().withMessage("Post text should be provided")
     .isLength({min: 1}).withMessage("Post should not be blank"),
 
-    async(req, res, next) => {
+    async(req, res) => {
             
         // perform validation
         logger.info(`The user with id: ${req.userId} tries to create a post...`);
@@ -71,7 +71,7 @@ const updatePost = [
     .exists().withMessage("Post text should be provided")
     .isLength({min: 1}).withMessage("Post should not be blank"),
 
-    async (req, res, next) => {
+    async (req, res) => {
         // perform validation
         logger.info(`The user with id: ${req.userId} tries to update the post with id ${req.params.id}...`);
         const errors = validationResult(req);
@@ -109,7 +109,7 @@ const deletePost = [
 
     verifyToken,
 
-    async (req, res, next) => {
+    async (req, res) => {
         try{
             logger.info(`The user with id: ${req.userId} tries to delete the post with id ${req.params.id}...`);
             // find the post by id
@@ -141,3 +141,4 @@ module.exports = {
     updatePost,
     deletePost,
 }
+export {}

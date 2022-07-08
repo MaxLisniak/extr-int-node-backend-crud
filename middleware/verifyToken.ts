@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
         // The token is not provided
         logger.error("Cannot verify the token, no token provided")
         return res.sendStatus(401)
-    };
+    }
     const token = authHeader.split(' ')[1];
     // verify the access token provided
     jwt.verify(
@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
             if (err) {
                 logger.error("Token expired")
                 return res.sendStatus(403)
-            }; //invalid token
+            } //invalid token
             // add virified user id to request
             req.userId = decoded.userId;
             next();
@@ -29,3 +29,4 @@ const verifyToken = (req, res, next) => {
 }
 
 module.exports = verifyToken
+export {}

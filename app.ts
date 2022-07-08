@@ -1,11 +1,11 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var cors = require('cors')
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const cors = require('cors')
 require('dotenv').config()
-var app = express();
-var postsRouter = require('./routes/posts');
-var usersRouter = require('./routes/users');
+const app = express();
+const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
 
 const corsConfig = {
     origin: "http://localhost:3000",
@@ -20,3 +20,4 @@ app.use('/', postsRouter);
 app.use('/users', usersRouter);
 
 module.exports = app;
+export {}
