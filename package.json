@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./dist/bin/www",
+    "start": "nodemon ./dist/bin/www",
     "lint": "npx eslint . --ext .ts"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "eslint": "^8.19.0",
+    "nodemon": "^2.0.19",
     "typescript": "^4.7.4"
   }
 }
